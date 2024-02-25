@@ -12,9 +12,7 @@ function! vaxe#Log(str)
 endfunction
 
 function! vaxe#CurrentTarget()
-   if exists("g:vaxe_lime_target")
-      return "g:vaxe_lime_target"
-   elseif exists("g:vaxe_flow_target")
+   if exists("g:vaxe_flow_target")
       return "g:vaxe_flow_target"
    else
       return ''
@@ -222,9 +220,7 @@ endfunction
 " A function that runs on a hx filetype load.  It will set the default hxml
 " path if the project hxml or lime are not set.
 function! vaxe#AutomaticHxml()
-    if exists ("g:vaxe_lime")
-        call vaxe#lime#ProjectLime(g:vaxe_lime)
-    elseif exists ("g:vaxe_flow")
+    if exists ("g:vaxe_flow")
         call vaxe#flow#ProjectFlow(g:vaxe_flow)
     elseif exists('g:vaxe_hxml')
         call vaxe#ProjectHxml(g:vaxe_hxml)
@@ -269,13 +265,7 @@ function! vaxe#DefaultHxml(...)
                 let base_build = getcwd() . '/' . base_build
             endif
 
-            if base_build =~ '\.lime' || base_build =~ '\.xml'
-                let b:vaxe_lime = base_build
-                call vaxe#lime#BuildLimeHxml(b:vaxe_lime)
-            elseif base_build =~ '\.xml'
-                let b:vaxe_lime = base_build
-                call vaxe#lime#BuildLimeHxml(b:vaxe_lime)
-            elseif base_build =~ '\.flow'
+            if base_build =~ '\.flow'
                 let b:vaxe_flow = base_build
                 call vaxe#flow#BuildFlowHxml(b:vaxe_flow)
             else
