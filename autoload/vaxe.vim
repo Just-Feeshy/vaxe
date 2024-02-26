@@ -285,9 +285,6 @@ function! vaxe#DefaultHxml(...)
             augroup temp_hxml
                 autocmd BufWritePost <buffer> call vaxe#DefaultHxml(expand("%"))| autocmd! temp_hxml
             augroup END
-        else
-            redraw
-            echomsg "Default build file not valid: " . b:vaxe_hxml
         endif
         return
     endif
